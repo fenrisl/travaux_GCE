@@ -1,6 +1,4 @@
-"""Script used to delete duplicates and computers in initialization
-To use the script, please install"""
-# faire dexcription
+"""Script used to import servers from GCE into Cyberwatch and delete terminated GCE servers"""
 
 # Based on the Apache Libcloud API https://libcloud.apache.org/index.html
 
@@ -110,7 +108,7 @@ def display_and_delete(to_delete_list, delete=False):
     print('\n\n================= Total of {} servers on Cyberwatch to delete (delete={}) ================='.format(len(to_delete_list),
                                                                                                 delete))
     for server in to_delete_list:
-        print('{} --- {} --- {}'.format(server.hostname, server.remote_ip, server.id))
+        print('{} --- {} --- {}'.format(server.remote_ip, server.hostname, server.id))
         if delete is True:
             API.delete_remote_access(server.id)
 
@@ -122,7 +120,7 @@ def launch_script(parsed_args):
 
     ComputeEngine = get_driver(Provider.GCE)
     # driver = ComputeEngine('your_service_account_email', 'path_to_key_file', project='your_project_id')
-    driver = ComputeEngine('******',
+    driver = ComputeEngine('',
                            'quickstart-1579112015773-a50695cb060a.json', project='quickstart-1579112015773')
     GCE_servers = driver.list_nodes()
 
